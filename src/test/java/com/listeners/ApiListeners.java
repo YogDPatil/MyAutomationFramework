@@ -68,7 +68,7 @@ public class ApiListeners implements ITestListener {
 		//Code which will create empty folder for us
 		//check if the report folder is present... if not present then create one
 		//else delete it and then create 
-		String reportPath = System.getProperty("user.dir")+"/Reports"; 
+		String reportPath = System.getProperty("user.dir")+"/Reports/"; 
 		File f = new File(reportPath);
 		if(f.exists()) {
 			try {
@@ -88,7 +88,7 @@ public class ApiListeners implements ITestListener {
 			}
 		}
 		Date date = new Date();
-		SimpleDateFormat formater = new SimpleDateFormat("d-MMM-YY HH-MM-SS");
+		SimpleDateFormat formater = new SimpleDateFormat("d-MMM-YY hh-mm-ss");
 		String data  = formater.format(date);
 		extentSparkReporter = new ExtentSparkReporter(reportPath+" reports-"+data);
 		extentReports.attachReporter(extentSparkReporter);

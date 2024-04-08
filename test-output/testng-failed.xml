@@ -3,13 +3,12 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="com.api.test.SupAssignJobApiTest">
+      <class name="com.api.test.DataProviderLoginApiTest">
         <methods>
+          <include name="test_logi_api_request" invocation-numbers="0"/>
           <include name="setUp"/>
-          <include name="setupApiBody"/>
-          <include name="test_sup_assign_api_request"/>
         </methods>
-      </class> <!-- com.api.test.SupAssignJobApiTest -->
+      </class> <!-- com.api.test.DataProviderLoginApiTest -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
