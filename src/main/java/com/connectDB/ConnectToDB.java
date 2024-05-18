@@ -11,8 +11,8 @@ public class ConnectToDB {
 	public static void main(String []args) throws SQLException {
 
 		// here JDBC is a database connector,
-		//mysql is a database
-		//139.59.91.96:3306 is a database url and SR_DEV is a datbase name
+		// mysql is a database
+		// 139.59.91.96:3306 is a database url and SR_DEV is a datbase name
 		Connection connection = DriverManager.getConnection("jdbc:mysql://139.59.91.96:3306/SR_DEV", "produser", "qweQWe123!");
 		Statement statement = connection.createStatement();
 		ResultSet resultSet = statement.executeQuery("SELECT * from SR_DEV.mst_role where id =3");
