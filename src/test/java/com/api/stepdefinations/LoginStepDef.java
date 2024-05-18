@@ -43,8 +43,8 @@ public class LoginStepDef {
 	}
 
 
-	@Then("Validate status code {int}")
-	public void validate_status_code(int statusCode) {
+	@Then("Validate status code of the login api request {int}")
+	public void validate_status_code_of_the_login_api_request(int statusCode) {
 		response.then().log().all().assertThat().statusCode(statusCode);
 	}
 

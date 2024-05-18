@@ -7,7 +7,7 @@ Feature: To test login api request feature
     And The header passed is "Content-Type" and "application/json"
     And Enter login credentials in body "iamfd" and "password"
     When Post api request with endpoint "/login"
-    Then Validate status code 200
+    Then Validate status code of the login api request 200
     And Response time should be less than 1500
     And The response body should contains "Success" message
-    And Token should be generated  
+    And Token should be generated
