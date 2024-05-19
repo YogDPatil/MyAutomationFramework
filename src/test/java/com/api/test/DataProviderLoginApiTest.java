@@ -26,7 +26,7 @@ public final class DataProviderLoginApiTest extends ApiTestBase{
 		.header("Content-Type","application/json")
 		.body("{\n"+"\"username\":\""+username+"\",\n"+"\""
 				+password+"\":\"password\"\n"+"}")
-		.when()
+		.when().log().all()
 		.post(RestAssured.baseURI+"/login")
 		.then()
 		.log().all()

@@ -1,7 +1,9 @@
-package com.UI.example;
+package com.ui.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+
+import com.utils.BrowserUtils;
 
 public final class LoginPage extends BrowserUtils{
 
@@ -11,9 +13,11 @@ public final class LoginPage extends BrowserUtils{
 	
 	private WebDriver driver;
 	
-	public LoginPage(WebDriver driver) {
+	public LoginPage(WebDriver driver, String url) {
 		super(driver);
 		this.driver = driver;
+		goToWebSite(url);
+		maximizeWindow();
 	}
 	
 	public DasboardPage doLogin(String username, String password) {
