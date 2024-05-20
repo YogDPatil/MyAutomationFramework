@@ -1,6 +1,8 @@
-package com.UI.example;
+package com.ui.pages;
 
 import org.openqa.selenium.WebDriver;
+
+import com.utils.BrowserUtils;
 
 public final class CreateJobPage extends BrowserUtils{
 
