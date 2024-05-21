@@ -54,6 +54,11 @@ public abstract class BrowserUtils {
 		//driver.findElement(locator).click();
 	}
 
+	public void selectValueFromCustomDropdown(/*By dropdownLocator,*/ By dropValueslocator) {
+		//clickOn(dropdownLocator);
+		wait.until(ExpectedConditions.elementToBeClickable(dropValueslocator)).click();
+	}
+	
 	public String getCurrentUrl() {
 		return driver.getCurrentUrl();
 	}
@@ -123,7 +128,9 @@ public abstract class BrowserUtils {
 	}
 
 	public void terminateBrowserSession() {
-		sleepFor(2);
+		sleepFor(5);
 		driver.quit();
 	}
+	
+	
 }
