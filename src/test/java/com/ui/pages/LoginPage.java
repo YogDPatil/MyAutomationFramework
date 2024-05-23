@@ -1,5 +1,7 @@
 package com.ui.pages;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -18,6 +20,7 @@ public final class LoginPage extends BrowserUtils{
 		this.driver = driver;
 		goToWebSite(url);
 		maximizeWindow();
+		
 	}
 	
 	public DasboardPage doLogin(String username, String password) {
