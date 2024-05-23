@@ -13,9 +13,11 @@ import org.hamcrest.Matchers;
 import com.api.pojo.ApiRequestBody;
 import com.constants.Env;
 import com.constants.Role;
+import com.github.javafaker.Faker;
 import com.google.gson.Gson;
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvException;
+import com.ui.pojo.CreateJobUiPojo;
 
 import io.restassured.RestAssured;
 
@@ -148,6 +150,13 @@ public abstract class TestUtils {
 		dataIterator.next(); // 0th index retrived but not stored means csv file column heading can avoid to pass into code
 		return dataIterator;
 	}
-	
 
+
+	public static CreateJobUiPojo getUIFakerDataForCreateJob() {
+		Faker faker = new Faker();
+		return new CreateJobUiPojo("Apple", "IPhone", "Iphone 11", faker.numerify("##############"),
+				"12/4/2024", "In Warrenty", "Poor battery life", "Remark", faker.name().firstName(), faker.name().lastName(),
+				faker.numerify("98########"), faker.internet().emailAddress(), faker.address().buildingNumber(), faker.address().buildingNumber(),
+				faker.address().cityName(), faker.address().streetName(), faker.address().city(), "Maharashtra", faker.numerify("######"));
+	}
 }

@@ -8,6 +8,7 @@ import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -24,12 +25,12 @@ import com.constants.Browser;
 public abstract class BrowserUtils {
 
 	WebDriver driver;
-	static WebDriver screenshotDriver;
+	static WebDriver staticWebDriver;
 	WebDriverWait wait;
 
 	public BrowserUtils(WebDriver driver) {
 		this.driver = driver;
-		screenshotDriver = driver;
+		staticWebDriver = driver;
 		wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 	}
 
@@ -42,30 +43,40 @@ public abstract class BrowserUtils {
 	}
 
 	public void enterText(By locator, String text) {
-		//sleepFor(4);
+		// sleepFor(4);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).clear();
-		//driver.findElement(locator).clear();
+		// driver.findElement(locator).clear();
 		driver.findElement(locator).sendKeys(text);
 	}
 
 	public void clickOn(By locator) {
-		//sleepFor(2);
+		// sleepFor(2);
 		wait.until(ExpectedConditions.elementToBeClickable(locator)).click();
-		//driver.findElement(locator).click();
+		// driver.findElement(locator).click();
 	}
 
-	public void selectValueFromCustomDropdown(/*By dropdownLocator,*/ By dropValueslocator) {
-		//clickOn(dropdownLocator);
+//	public void clickOnElementByJE(WebElement element) {
+//		wait.until(ExpectedConditions.elementToBeClickable(element));
+//		try {
+//			element.click();
+//		} catch (Exception e) {
+//			JavascriptExecutor je = (JavascriptExecutor) driver;
+//			je.executeScript("arguments[0].click()", element);
+//		}
+//	}
+
+	public void selectValueFromCustomDropdown(/* By dropdownLocator, */ By dropValueslocator) {
+		// clickOn(dropdownLocator);
 		wait.until(ExpectedConditions.elementToBeClickable(dropValueslocator)).click();
 	}
-	
+
 	public String getCurrentUrl() {
 		return driver.getCurrentUrl();
 	}
 
-	public void sleepFor(int sec){
+	public void sleepFor(int sec) {
 		try {
-			Thread.sleep(sec*1000);
+			Thread.sleep(sec * 1000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -75,54 +86,71 @@ public abstract class BrowserUtils {
 	public String getElementText(By locator) {
 		return wait.until(ExpectedConditions.visibilityOfElementLocated(locator)).getText();
 	}
-	
+
 	public static String takeScreenshot(String testName) {
 		// typecasted driver to takescreenshot
-		TakesScreenshot takeScreenshot = (TakesScreenshot) screenshotDriver;
+		TakesScreenshot takeScreenshot = (TakesScreenshot) staticWebDriver;
 		// now capture screenshot and store it in file formate
 		File srcScreenshotFile = takeScreenshot.getScreenshotAs(OutputType.FILE);
-		
-		//create directory to store screenshots if directory is not present
+
+		// create directory to store screenshots if directory is not present
 		Date date = new Date();
 		SimpleDateFormat formater = new SimpleDateFormat("d-MMM-YY hh:mm:ss");
-		String formatedDate  = formater.format(date);
-		File fileDirectory = new File(System.getProperty("user.dir")+"/screenshots/"+formatedDate);
+		String formatedDate = formater.format(date);
+		File fileDirectory = new File(System.getProperty("user.dir") + "/screenshots/" + formatedDate);
 		try {
-			// make directory if not present 
+			// make directory if not present
 			FileUtils.forceMkdir(fileDirectory);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		//create new file in png format so that screenshot file can copy into it
-		String screenshotPath = System.getProperty("user.dir")+"/screenshots/"+formatedDate+"/"+testName+".png";
+
+		// create new file in png format so that screenshot file can copy into it
+		String screenshotPath = System.getProperty("user.dir") + "/screenshots/" + formatedDate + "/" + testName
+				+ ".png";
 		File destScreenshotFile = new File(screenshotPath);
 		try {
 			destScreenshotFile.createNewFile();
-			// here copy captured source screenshot file and paste it into destination file in .png format
+			// here copy captured source screenshot file and paste it into destination file
+			// in .png format
 			FileUtils.copyFile(srcScreenshotFile, destScreenshotFile);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return screenshotPath;
 	}
-	
-	public void initialiseDriver(Browser browser) {
-		if(browser == Browser.CHROME) {
+
+	// public static WebDriver initialiseDriver(Browser browser) {
+	// if(browser == Browser.CHROME) {
+	// staticWebDriver = new ChromeDriver();
+	// }
+	// else if(browser == Browser.FIREFOX) {
+	// staticWebDriver = new FirefoxDriver();
+	// }
+	// else if(browser == Browser.EDGE) {
+	// staticWebDriver = new EdgeDriver();
+	// }
+	// else if (browser == Browser.SAFARI) {
+	// staticWebDriver = new SafariDriver();
+	// }
+	// else {
+	// System.out.println("Browser is not compatible");
+	// }
+	// return staticWebDriver;
+	// }
+
+	public void initialiseDriver(String browser) {
+		if (browser.equalsIgnoreCase("chrome")) {
 			driver = new ChromeDriver();
-		}
-		else if(browser == Browser.FIREFOX) {
+		} else if (browser.equalsIgnoreCase("firefox")) {
 			driver = new FirefoxDriver();
-		}
-		else if(browser == Browser.EDGE) {
+		} else if (browser.equalsIgnoreCase("edge")) {
 			driver = new EdgeDriver();
-		}
-		else if (browser == Browser.SAFARI) {
+		} else if (browser.equalsIgnoreCase("safari")) {
 			driver = new SafariDriver();
-		}
-		else {
+		} else {
 			System.out.println("Browser is not compatible");
 		}
 	}
@@ -131,6 +159,5 @@ public abstract class BrowserUtils {
 		sleepFor(5);
 		driver.quit();
 	}
-	
-	
+
 }

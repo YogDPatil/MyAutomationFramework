@@ -1,5 +1,11 @@
 package com.ui.tests;
 
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+import org.testng.AssertJUnit;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.Test;
+import org.testng.AssertJUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -14,8 +20,12 @@ import com.utils.BrowserUtils;
 
 @Listeners(com.listeners.UiListeners.class)
 public class LoginPageTest {
+	
 	WebDriver driver;
 	LoginPage loginPage;
+
+	
+	
 	@BeforeMethod(description = "setup browser and load the page")
 	public void setup() {
 		System.setProperty("webdriver.driver.chrome", System.getProperty("user.dir")+"/drivers.chromedriver");
@@ -27,10 +37,11 @@ public class LoginPageTest {
 	@Test(description = "test the user can login by ui")
 	public void testLoginByUi() {
 		
-		Assert.assertEquals(loginPage.doLogin("iamfd", "password").getUsername(), "iamsup");
+		AssertJUnit.assertEquals(loginPage.doLogin("iamfd", "password").getUsername(), "iamsup");
 		
 	}
 
+	
 	@AfterMethod
 	public void tearDown() {
 		loginPage.terminateBrowserSession();
