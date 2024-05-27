@@ -1,4 +1,4 @@
-package com.api.test;
+package com.api.tests;
 
 import java.io.IOException; 
 

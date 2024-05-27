@@ -2,8 +2,10 @@ package com.ui.tests;
 
 import org.testng.annotations.Test;
 
-public final class DashboardPageTest extends TestBase{
+import com.ui.pojo.CreateJobUiPojo;
 
+public final class DashboardPageTest extends TestBase{
+	
 	
 	@Test
 	public void testCreatedJobTable() {

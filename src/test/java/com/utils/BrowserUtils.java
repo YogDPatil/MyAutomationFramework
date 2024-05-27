@@ -156,7 +156,7 @@ public abstract class BrowserUtils {
 	}
 
 	public void terminateBrowserSession() {
-		sleepFor(5);
+		sleepFor(2);
 		driver.quit();
 	}
 

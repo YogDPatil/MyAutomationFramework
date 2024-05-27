@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [UI E2E Suit]">
+  <test thread-count="5" parallel="tests" name="Phoenix app UI E2E Test(failed)">
+    <groups>
+      <run>
+        <include name="e2e"/>
+      </run>
+    </groups>
+    <classes>
+      <class name="com.ui.tests.CreateJobPageTest">
+        <methods>
+          <include name="testCreateJobByUI"/>
+        </methods>
+      </class> <!-- com.ui.tests.CreateJobPageTest -->
+    </classes>
+  </test> <!-- Phoenix app UI E2E Test(failed) -->
+</suite> <!-- Failed suite [UI E2E Suit] -->
