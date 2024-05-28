@@ -20,13 +20,13 @@ public abstract class TestBase {
 	LoginPage loginPage;
 	
 
-	@BeforeTest
+	@BeforeTest(alwaysRun = true)
 	public void setupAnd() {
 		driver = new ChromeDriver();
 		loginPage = new LoginPage(driver, "http://phoenix.testautomationacademy.in/sign-in");
 	}
 
-	@AfterSuite
+	@AfterSuite(alwaysRun = true)
 	public void tearDown() {
 		//pages.terminateBrowserSession();
 		driver.quit();

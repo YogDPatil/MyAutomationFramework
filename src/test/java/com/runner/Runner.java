@@ -16,8 +16,8 @@ public class Runner {
 
 	public static void main(String[] args) {
 
-		Componant componant = Componant.API;
-		TestType testType = TestType.REGRESSION;
+		Componant componant = Componant.UI;
+		TestType testType = TestType.SANITY;
 
 		TestNG testNg = new TestNG();
 
