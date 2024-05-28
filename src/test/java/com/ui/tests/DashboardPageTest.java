@@ -1,12 +1,29 @@
 package com.ui.tests;
 
+import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public final class DashboardPageTest extends TestBase{
+import com.ui.pages.DasboardPage;
+import com.ui.pojo.CreateJobUiPojo;
+import com.utils.TestUtils;
 
-	
-	@Test
+public final class DashboardPageTest extends TestBase {
+
+	private DasboardPage dashBoard;
+	private String jobID;
+
+	@BeforeMethod
+	public void dashboardPageSetUp() {
+		dashBoard = new DasboardPage(driver);
+	}
+
+	@Test()
 	public void testCreatedJobTable() {
-		loginPage.doLogin("iamfd", "password").getCreatedJobTableDetails();
+		jobID = loginPage.doLogin("iamfd", "password").goToCreateJobPage()
+				.createJob(TestUtils.getUIFakerDataForCreateJob());
+		// Assert.assertEquals(dashBoard.verifyCreatedJobIsPresentInTable().contains(jobID));
+		Assert.assertEquals(dashBoard.verifyCreatedJobIsPresentInTable(jobID), true);
+
 	}
 }

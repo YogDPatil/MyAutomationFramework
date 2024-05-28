@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Properties;
 
 import org.hamcrest.Matchers;
+import org.openqa.selenium.WebElement;
 
 import com.api.pojo.ApiRequestBody;
 import com.constants.Env;
@@ -24,7 +25,7 @@ import io.restassured.RestAssured;
 public abstract class TestUtils {
 
 	static ApiRequestBody apiRequestBody;
-	public static int jobID;
+	public static String jobID;
 
 	public static String convertPojoToJson(Object object){
 		Gson gson = new Gson();
@@ -159,4 +160,19 @@ public abstract class TestUtils {
 				faker.numerify("98########"), faker.internet().emailAddress(), faker.address().buildingNumber(), faker.address().buildingNumber(),
 				faker.address().cityName(), faker.address().streetName(), faker.address().city(), "Maharashtra", faker.numerify("######"));
 	}
+	
+	public static boolean searchEnteryInList(List<String> list, String reqData) {
+		boolean status = false;
+		for(String data:list) {
+			//String data = entry.getText();
+			if(data.equals(reqData)) {
+				status = true;
+				break;
+			}else {
+				status = false;
+			}
+		}
+		return status;
+	}
+	
 }
