@@ -141,19 +141,19 @@ public abstract class BrowserUtils {
 	// return staticWebDriver;
 	// }
 
-	public void initialiseDriver(String browser) {
-		if (browser.equalsIgnoreCase("chrome")) {
-			driver = new ChromeDriver();
-		} else if (browser.equalsIgnoreCase("firefox")) {
-			driver = new FirefoxDriver();
-		} else if (browser.equalsIgnoreCase("edge")) {
-			driver = new EdgeDriver();
-		} else if (browser.equalsIgnoreCase("safari")) {
-			driver = new SafariDriver();
-		} else {
-			System.out.println("Browser is not compatible");
-		}
-	}
+//	public void initialiseDriver(String browser) {
+//		if (browser.equalsIgnoreCase("chrome")) {
+//			driver = new ChromeDriver();
+//		} else if (browser.equalsIgnoreCase("firefox")) {
+//			driver = new FirefoxDriver();
+//		} else if (browser.equalsIgnoreCase("edge")) {
+//			driver = new EdgeDriver();
+//		} else if (browser.equalsIgnoreCase("safari")) {
+//			driver = new SafariDriver();
+//		} else {
+//			System.out.println("Browser is not compatible");
+//		}
+//	}
 
 	public void terminateBrowserSession() {
 		sleepFor(2);
