@@ -14,7 +14,7 @@ public class CreateJobPageTest extends TestBase {
 
 	private CreateJobUiPojo createJobData;
 
-	@BeforeMethod
+	@BeforeMethod(alwaysRun = true)
 	public void loadCreateJobPage() {
 
 		// createJobUiPojo = new CreateJobUiPojo("Apple", "IPhone", "Iphone 11", "In
@@ -22,7 +22,7 @@ public class CreateJobPageTest extends TestBase {
 		createJobData = TestUtils.getUIFakerDataForCreateJob();
 	}
 
-	@Test
+	@Test(description = "To verify job creatred by ui successfully", groups = {"sanity"})
 	public void testCreateJobByUI() {
 		Assert.assertTrue(loginPage.doLogin("iamfd", "password").goToCreateJobPage().createJob(createJobData)
 				.contains("JOB_"));
