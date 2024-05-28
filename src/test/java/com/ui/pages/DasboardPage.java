@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.ui.pojo.DashboardTablePojo;
 import com.utils.BrowserUtils;
+import com.utils.TestUtils;
 
 public final class DasboardPage extends BrowserUtils {
 
@@ -29,6 +30,9 @@ public final class DasboardPage extends BrowserUtils {
 
 	WebDriver driver;
 	WebDriverWait wait;
+	private List<String> jobIDs;
+	private List<WebElement> cellList = null;
+	private List<DashboardTablePojo> tableList;
 
 	public DasboardPage(WebDriver driver) {
 		super(driver);
@@ -46,7 +50,7 @@ public final class DasboardPage extends BrowserUtils {
 		return new CreateJobPage(driver);
 	}
 
-	public List<String> getCreatedJobTableDetails() {
+	public boolean verifyCreatedJobIsPresentInTable(String jobId) {
 		clickOn(DASHBOARD_LINK_LOCATOR);
 		clickOn(CREATED_TODAY_BUTTON_LOCATOR);
 		WebElement createdJobElement = wait
@@ -54,33 +58,26 @@ public final class DasboardPage extends BrowserUtils {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(CREATED_JOB_TABLE_ROW_LOCATOR));
 		List<WebElement> rowList = createdJobElement.findElements(CREATED_JOB_TABLE_ROW_LOCATOR);
 		System.out.println("****" + rowList.size());
-		List<WebElement> cellList = null;
-		List<DashboardTablePojo> tableList = new ArrayList<DashboardTablePojo>();
-		List<String> jobNumber = new ArrayList<String>();
+		tableList = new ArrayList<DashboardTablePojo>();
+		jobIDs = new ArrayList<String>();
+		boolean status = false;
 		for (WebElement row : rowList) {
 
 			cellList = row.findElements(CREATED_JOB_TABLE_CELL_LOCATOR);
-//			tableList.add(new DashboardTablePojo(cellList.get(0).getText(), cellList.get(1).getText(),
-//					cellList.get(2).getText(), cellList.get(3).getText(), cellList.get(4).getText(),
-//					cellList.get(5).getText(), cellList.get(6).getText()));
 
-			// jobNumber.add(cell.getText());
 		}
+
 		for (WebElement cell : cellList) {
 			String cellData = cell.getText();
 			if (cellData.contains("JOB_")) {
-				jobNumber.add(cellData);
+				jobIDs.add(cellData);
 			}
-			// jobNumber.add(cellList.get(1).getText());
-
 		}
 
-		System.out.println(jobNumber.toString());
-//		for (DashboardTablePojo table : tableList) {
-//			System.out.println(table);
-//		}
-		//return tableList;
-		return jobNumber;
+		 System.out.println(jobIDs.toString());
 
+		// return jobNumber;
+		// return status;
+		return TestUtils.searchEnteryInList(jobIDs, jobId);
 	}
 }

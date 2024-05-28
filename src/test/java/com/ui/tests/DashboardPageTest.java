@@ -22,7 +22,8 @@ public final class DashboardPageTest extends TestBase {
 	public void testCreatedJobTable() {
 		jobID = loginPage.doLogin("iamfd", "password").goToCreateJobPage()
 				.createJob(TestUtils.getUIFakerDataForCreateJob());
-		Assert.assertTrue(dashBoard.getCreatedJobTableDetails().contains(jobID));
+		// Assert.assertEquals(dashBoard.verifyCreatedJobIsPresentInTable().contains(jobID));
+		Assert.assertEquals(dashBoard.verifyCreatedJobIsPresentInTable(jobID), true);
 
 	}
 }
