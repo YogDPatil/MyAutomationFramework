@@ -24,7 +24,7 @@ import io.restassured.RestAssured;
 public abstract class TestUtils {
 
 	static ApiRequestBody apiRequestBody;
-	public static int jobID;
+	public static String jobID;
 
 	public static String convertPojoToJson(Object object){
 		Gson gson = new Gson();

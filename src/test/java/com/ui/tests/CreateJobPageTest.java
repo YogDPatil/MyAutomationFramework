@@ -1,6 +1,7 @@
 package com.ui.tests;
 
 import org.testng.annotations.Test;
+import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -13,17 +14,18 @@ public class CreateJobPageTest extends TestBase {
 
 	private CreateJobUiPojo createJobData;
 
-//	@BeforeMethod
-//	public void loadCreateJobPage() {
-//
-//		// createJobUiPojo = new CreateJobUiPojo("Apple", "IPhone", "Iphone 11", "In
-//		// Warrenty");
-//		createJobData = TestUtils.getUIFakerDataForCreateJob();
-//	}
+	@BeforeMethod
+	public void loadCreateJobPage() {
+
+		// createJobUiPojo = new CreateJobUiPojo("Apple", "IPhone", "Iphone 11", "In
+		// Warrenty");
+		createJobData = TestUtils.getUIFakerDataForCreateJob();
+	}
 
 	@Test
-	public void testCreateJobByUI() throws InterruptedException {
-		loginPage.doLogin("iamfd", "password").goToCreateJobPage().createJob(TestUtils.getUIFakerDataForCreateJob());
+	public void testCreateJobByUI() {
+		Assert.assertTrue(loginPage.doLogin("iamfd", "password").goToCreateJobPage().createJob(createJobData)
+				.contains("JOB_"));
 	}
 
 }

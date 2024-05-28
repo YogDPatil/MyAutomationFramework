@@ -17,6 +17,7 @@ import com.utils.BrowserUtils;
 public final class DasboardPage extends BrowserUtils {
 
 	private static final By CREATE_JOB_LINK_LOCATOR = By.xpath("//span[contains(text(), 'Create Job')]/../../..");
+	private static final By DASHBOARD_LINK_LOCATOR = By.xpath("//span[contains(text(), 'Dashboard')]/../../..");
 	private static final By SIGNIN_USERNAME_LOCATOR = By
 			.xpath("//span[contains(text(),'Signed in as')]/following-sibling::span");
 	private static final By USER_ICON_LOCATOR = By.xpath("//mat-icon[@data-mat-icon-name='user-circle']/../../..");
@@ -45,28 +46,41 @@ public final class DasboardPage extends BrowserUtils {
 		return new CreateJobPage(driver);
 	}
 
-	public List<DashboardTablePojo> getCreatedJobTableDetails() {
+	public List<String> getCreatedJobTableDetails() {
+		clickOn(DASHBOARD_LINK_LOCATOR);
 		clickOn(CREATED_TODAY_BUTTON_LOCATOR);
 		WebElement createdJobElement = wait
 				.until(ExpectedConditions.visibilityOfElementLocated(CREATED_JOB_TABLE_LOCATOR));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(CREATED_JOB_TABLE_ROW_LOCATOR));
 		List<WebElement> rowList = createdJobElement.findElements(CREATED_JOB_TABLE_ROW_LOCATOR);
 		System.out.println("****" + rowList.size());
-		List<WebElement> cellList;
+		List<WebElement> cellList = null;
 		List<DashboardTablePojo> tableList = new ArrayList<DashboardTablePojo>();
-
+		List<String> jobNumber = new ArrayList<String>();
 		for (WebElement row : rowList) {
 
 			cellList = row.findElements(CREATED_JOB_TABLE_CELL_LOCATOR);
-			tableList.add(new DashboardTablePojo(cellList.get(0).getText(), cellList.get(1).getText(),
-					cellList.get(2).getText(), cellList.get(3).getText(), cellList.get(4).getText(),
-					cellList.get(5).getText(), cellList.get(6).getText()));
+//			tableList.add(new DashboardTablePojo(cellList.get(0).getText(), cellList.get(1).getText(),
+//					cellList.get(2).getText(), cellList.get(3).getText(), cellList.get(4).getText(),
+//					cellList.get(5).getText(), cellList.get(6).getText()));
+
+			// jobNumber.add(cell.getText());
+		}
+		for (WebElement cell : cellList) {
+			String cellData = cell.getText();
+			if (cellData.contains("JOB_")) {
+				jobNumber.add(cellData);
+			}
+			// jobNumber.add(cellList.get(1).getText());
+
 		}
 
-		for (DashboardTablePojo table : tableList) {
-			System.out.println(table);
-		}
-		return tableList;
+		System.out.println(jobNumber.toString());
+//		for (DashboardTablePojo table : tableList) {
+//			System.out.println(table);
+//		}
+		//return tableList;
+		return jobNumber;
 
 	}
 }

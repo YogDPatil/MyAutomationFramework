@@ -7,6 +7,7 @@ import org.openqa.selenium.WebDriver;
 
 import com.ui.pojo.CreateJobUiPojo;
 import com.utils.BrowserUtils;
+import com.utils.TestUtils;
 
 public final class CreateJobPage extends BrowserUtils {
 
@@ -15,7 +16,8 @@ public final class CreateJobPage extends BrowserUtils {
 	private static final By MODEL_DROPDOWN_LOCATOR = By.xpath("//mat-select[@placeholder='Select Model name']/..");
 	private static final By IMEI_TEXTBOX_LOCATOR = By.xpath("//input[@data-placeholder='0123456789']");
 	private static final By PURCHASE_DATE_LOCATOR = By.xpath("//input[@data-placeholder='dd/mm/yyyy']");
-	private static final By WARRENTY_DROPDOWN_LOCATOR = By.xpath("//mat-select[@placeholder='Select Warranty Status']/..");
+	private static final By WARRENTY_DROPDOWN_LOCATOR = By
+			.xpath("//mat-select[@placeholder='Select Warranty Status']/..");
 	private static final By FNAME_LOCATOR = By.xpath("//input[@data-placeholder='First Name']");
 	private static final By LNAME_LOCATOR = By.xpath("//input[@data-placeholder='Last Name']");
 	private static final By CONTACT_NO_LOCATOR = By.xpath("//input[@data-placeholder='Contact No.']");
@@ -30,7 +32,7 @@ public final class CreateJobPage extends BrowserUtils {
 	private static final By Remark_LOCATOR = By.xpath("//input[@data-placeholder='Remarks']");
 	private static final By PROBLE_DROPDOWN_LOCATOR = By.xpath("//mat-select[@placeholder='Select Problem']/..");
 	private static final By SUBMIT_BUTTON_LOCATOR = By.xpath("//span[contains(text(),'Submit')]/..");
-	private static final By SUCCESS_MESSAGE = By.xpath("//span[contains(text(),'Job created successfully')]");
+	private static final By SUCCESS_MESSAGE_LOCATOR = By.xpath("//span[contains(text(),'Job created successfully')]");
 
 	private WebDriver driver;
 
@@ -40,8 +42,13 @@ public final class CreateJobPage extends BrowserUtils {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 	}
 
-	public String createJob(CreateJobUiPojo data) throws InterruptedException {
-		Thread.sleep(2000);
+	public String createJob(CreateJobUiPojo data) {
+		try {
+			Thread.sleep(2000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		clickOn(OEM_DROPDOWN_LOCATOR);
 		By OEM_LOCATOR = By.xpath("//span[contains(text(), '" + data.getOemName() + "')]/..");
 		selectValueFromCustomDropdown(OEM_LOCATOR);
@@ -76,11 +83,12 @@ public final class CreateJobPage extends BrowserUtils {
 		By STATE_LOCATOR = By.xpath("//span[contains(text(), '" + data.getState() + "')]/..");
 		selectValueFromCustomDropdown(STATE_LOCATOR);
 		clickOn(SUBMIT_BUTTON_LOCATOR);
-		String message = getElementText(SUCCESS_MESSAGE);
+		String message = getElementText(SUCCESS_MESSAGE_LOCATOR);
 		String[] jobID = message.split(" ");
 		System.out.println(jobID[0]);
+		// TestUtils.jobID = jobID[0];
 		return jobID[0];
-		
+
 	}
 
 	public void getCreateJobPageUrl() {
